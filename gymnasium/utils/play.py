@@ -258,7 +258,7 @@ def play(
     assert isinstance(keys_to_action, dict)
     for key, action in keys_to_action.items():
         if isinstance(key, tuple):
-            assert len(key) > 0
+            # assert len(key) > 0
             assert all(isinstance(k, (str, int)) for k in key)
         else:
             assert isinstance(key, (str, int))
@@ -284,7 +284,7 @@ def play(
         if done:
             done = False
             obs = env.reset(seed=seed)
-        elif wait_on_player is False or len(game.pressed_keys) > 0:
+        elif wait_on_player is False or len(game.pressed_keys) >= 0:
             action = key_code_to_action.get(tuple(sorted(game.pressed_keys)), noop)
             prev_obs = obs
             obs, rew, terminated, truncated, info = env.step(action)
